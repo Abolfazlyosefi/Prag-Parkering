@@ -15,6 +15,7 @@ class PragueParking
         {
             //Visar huvudmeny
             ShowMenu();
+
             //Hanterar användarens val i menyn
             HandleMenuChoice();
 
@@ -262,7 +263,12 @@ class PragueParking
     //Metod för att hitta fordon 
     static void SearchVehicle()
     {
-        string regNumber = GetInput("");
+        string regNumber = GetInput("Ange registreringsnummer på fordonet du söker: ").ToUpper();
+        int spot = FindVehicle(regNumber);
+
+        Console.WriteLine(spot != -1 ? $"Fordonet står på plats {spot + 1}." : "Fordonet kunde inte hittas.");
+        Console.WriteLine("\n\n-------------------------\n\n");
+
     }
 
     // Skriver ut om en specifik P-plats är full eller tom
@@ -290,15 +296,14 @@ class PragueParking
     }
 
 
-    // Skriver ut info om alla P-platser
+    // Skriver ut info om alla P-platser och en kreativ visualisering :)
     static void PrintAllParkingSpots()
     {
         for (int i = 0; i < parkingGarage.Length; i++)
         {
-            Console.WriteLine(parkingGarage[i] == null ? $"Plats {i + 1} är tom. " : $"Plats {i + 1}: {parkingGarage[i]}");
-            Console.WriteLine("\n\n-------------------------\n\n");
-
-
+            Console.WriteLine("|-------------------------| \n\n");
+            Console.WriteLine(parkingGarage[i] == null ? $"\n     Plats {i + 1} är tom.     " : $"Plats {i + 1}: {parkingGarage[i]}    \n");
+            Console.WriteLine("\n\n|-------------------------| ");
         }
     }
 
